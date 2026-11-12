@@ -1,3 +1,9 @@
+USE master;
+GO
+
+DROP DATABASE IF EXISTS FailSafeIT;
+GO
+
 CREATE DATABASE FailSafeIT;
 GO
 
@@ -59,12 +65,14 @@ VALUES
     (2, 1, '20260401', '20260930', 'Review user permissions'),
     (2, 2, '20260501', '20261030', 'Automate application deployment');
 
+
+-- Fråga A:
 SELECT FullName, HourlyRate
 FROM Consultants
 WHERE HourlyRate > 1200
 ORDER BY HourlyRate DESC;
 
-
+-- Fr¨ga B:
 SELECT
     Customers.CompanyName,
     Consultants.FullName,
@@ -77,7 +85,7 @@ INNER JOIN Consultants
     ON Assignments.ConsultantId = Consultants.ConsultantId
 ORDER BY Customers.CompanyName, Assignments.StartDate;
 
-
+-- Fråga C:
 SELECT
     Customers.CompanyName,
     COUNT(Assignments.AssignmentId) AS ActiveAssignments
@@ -90,7 +98,7 @@ GROUP BY Customers.CustomerId, Customers.CompanyName
 ORDER BY Customers.CompanyName;
 
 
-
+-- Fråga D:
 UPDATE Consultants
 SET HourlyRate = 1350
 WHERE ConsultantId = 2;
@@ -101,7 +109,7 @@ FROM Consultants
 WHERE ConsultantId = 2;
 
 
-
+-- Fråga E:
 DELETE FROM Customers
 WHERE CustomerId = 3
 AND NOT EXISTS (
